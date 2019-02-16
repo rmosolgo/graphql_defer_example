@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  deck: one
+  scryfall_card_id: MyString
+  quantity: 1
+
+two:
+  deck: two
+  scryfall_card_id: MyString
+  quantity: 1
