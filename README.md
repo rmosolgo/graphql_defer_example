@@ -1,24 +1,23 @@
-# README
+# GraphQL-Ruby Defer Example
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app demonstrates how to use [`@defer`](#) with Rails, GraphQL-Ruby, Apollo Client and React.
 
-Things you may want to cover:
+The app is a deck builder for Magic the Gathering:
 
-* Ruby version
+- _Decks_ are persisted in the app's local database
+- _Cards_ are fetched from [Scryfall](https://scryfall.com)'s REST API
 
-* System dependencies
+`@defer` is used to reduce time-to-first-byte: local data is returned immediately, but external calls are deferred.
 
-* Configuration
+![demo of behavior](#)
 
-* Database creation
+## Development
 
-* Database initialization
+- Clone the repo
+- `bundle install`
+- `bundle exec db:create db:migrate`
+- `bundle exec rails server`
 
-* How to run the test suite
+## Testing
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- `bundle exec rails test:system`
