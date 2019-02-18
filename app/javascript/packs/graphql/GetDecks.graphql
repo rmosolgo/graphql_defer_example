@@ -1,0 +1,6 @@
+query GetDecks {
+  decks {
+    id
+    name
+  }
+}

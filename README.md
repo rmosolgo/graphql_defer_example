@@ -4,8 +4,8 @@ This app demonstrates how to use [`@defer`](#) with Rails, GraphQL-Ruby, Apollo 
 
 The app is a deck builder for Magic the Gathering:
 
-- _Decks_ are persisted in the app's local database
-- _Cards_ are fetched from [Scryfall](https://scryfall.com)'s REST API
+- _Decks_ are persisted in the app's local database (`::Deck` and `::Slot`)
+- _Cards_ are fetched from [Scryfall](https://scryfall.com)'s REST API (`::Scryfall::Card`)
 
 `@defer` is used to reduce time-to-first-byte: local data is returned immediately, but external calls are deferred.
 

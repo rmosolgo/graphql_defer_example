@@ -4,11 +4,13 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "apollo-boost": "^0.3.0-alpha.12",
+    "babel-plugin-graphql-tag": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "graphql": "^14.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-apollo": "^2.4.1",
+    "react-bootstrap-typeahead": "^3.3.4",
     "react-dom": "^16.8.2"
   },
   "devDependencies": {

@@ -1,0 +1,7 @@
+#import "./DeckDetail.graphql"
+
+query GetDeckDetail($deckId: ID!) {
+  deck: node(id: $deckId) {
+    ...DeckDetail
+  }
+}

@@ -5,20 +5,10 @@ module Types
     end
 
     def node(id:)
-      type_name, database_id = id.split
-      case type_name
-      when "Types::Deck"
-        ::Deck.find(database_id)
-      when "Types::Slot"
-        ::Slot.find(database_id)
-      when "Types::Card"
-        ::Scryfall::Card.load(database_id)
-      else
-        raise "Unsupported node: #{id.inspect}"
-      end
+      context.schema.object_from_id(id, context)
     end
 
-    # TODO paginate
+    # TODO paginate :P
     field :decks, [Types::Deck], null: false
 
     def decks

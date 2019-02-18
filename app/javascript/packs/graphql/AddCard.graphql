@@ -1,0 +1,9 @@
+#import "./DeckDetail.graphql"
+
+mutation AddCard($deckId: ID!, $cardId: ID!, $quantity: Int!) {
+  addCardToDeck(input:{deckId: $deckId, cardId: $cardId, quantity: $quantity}) {
+    deck {
+      ...DeckDetail
+    }
+  }
+}

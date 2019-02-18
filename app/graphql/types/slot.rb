@@ -1,4 +1,6 @@
 class Types::Slot < Types::BaseObject
+  implements Types::Node
+
   field :deck, Types::Deck, null: false
   field :quantity, Integer, null: false
   field :card, Types::Card, null: false

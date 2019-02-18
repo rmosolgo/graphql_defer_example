@@ -1,0 +1,6 @@
+query AutocompleteCard($query: String!) {
+  searchCards(query: $query) {
+    id
+    name
+  }
+}

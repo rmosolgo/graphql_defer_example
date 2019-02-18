@@ -1,0 +1,14 @@
+fragment DeckDetail on Deck {
+  id
+  name
+  slots {
+    id
+    quantity
+    card {
+      id
+      name
+      type
+      price
+    }
+  }
+}

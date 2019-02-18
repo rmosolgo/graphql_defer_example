@@ -1,0 +1,9 @@
+#import "./DeckDetail.graphql"
+
+mutation RemoveCard($deckId: ID!, $cardId: ID!) {
+  removeCardFromDeck(input:{deckId: $deckId, cardId: $cardId}) {
+    deck {
+      ...DeckDetail
+    }
+  }
+}

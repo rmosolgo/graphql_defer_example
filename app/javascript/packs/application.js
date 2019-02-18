@@ -6,13 +6,10 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
-
-
 import ApolloClient from "apollo-boost";
-import gql from "graphql-tag";
 import React from "react";
 import { render } from "react-dom";
-import { ApolloProvider, Query } from "react-apollo";
+import App from "./components/App"
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -27,62 +24,5 @@ const client = new ApolloClient({
   },
 });
 
-client
-  .query({
-    query: gql`
-      {
-        searchCards(query: "Venser") {
-          id
-          name
-        }
-      }
-    `
-  })
-  .then(result => console.log(result));
 
-const Decks = () => (
-  <Query
-    query={gql`
-      {
-        decks {
-          name
-          slots {
-            quantity
-            card {
-              name
-              price
-            }
-          }
-        }
-      }
-    `}
-  >
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
-
-      return data.decks.map(({ name, slots }) => (
-        <div key={name}>
-          <p>{name}</p>
-          <ul>
-            {slots.map(({quantity, card}) => (
-              <li key={card.name}>{quantity}x {card.name} (${card.price} each)</li>
-            ))}
-            </ul>
-        </div>
-      ));
-    }}
-  </Query>
-)
-const App = () => (
-  <ApolloProvider client={client}>
-    <div>
-      <h2>My first Apollo app 🚀</h2>
-      <Decks />
-    </div>
-  </ApolloProvider>
-);
-
-document.addEventListener('DOMContentLoaded', function() {
-  render(<App />, document.getElementById("root"));
-}, false);
+render(<App client={client}/>, document.getElementById("app-root"));

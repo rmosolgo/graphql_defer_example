@@ -1,0 +1,8 @@
+mutation AddDeck($deckName: String!) {
+  createDeck(input: {name: $deckName}) {
+    deck {
+      id
+      name
+    }
+  }
+}
