@@ -13,8 +13,8 @@ class App extends React.Component {
     return (
       <ApolloProvider client={this.props.client}>
         <div className="container-fluid">
-          <nav class="navbar navbar-light bg-light row mb-2">
-            <span class="navbar-brand mb-0 h1 col">Magic Deckbox</span>
+          <nav className="navbar navbar-light bg-light row mb-2">
+            <span className="navbar-brand mb-0 h1 col">Magic Deckbox</span>
           </nav>
           <div className="row">
             <div className="col-4">

@@ -26,4 +26,8 @@ class GraphqlDeferExampleSchema < GraphQL::Schema
       raise "Unknown resolve_type: #{type}, #{obj}"
     end
   end
+
+  use GraphQL::Execution::Interpreter
+  use GraphQL::Analysis::AST
+  use GraphQL::Pro::Defer
 end

@@ -3,7 +3,7 @@ import {Mutation} from "react-apollo"
 import GetDecks from "../graphql/GetDecks.graphql"
 import AddDeckMutation from "../graphql/AddDeck.graphql"
 
-const AddDeck = () => {
+const AddDeck = (props) => {
   let input;
 
   return (
@@ -15,6 +15,7 @@ const AddDeck = () => {
           query: GetDecks,
           data: { decks: decks.concat([createDeck.deck]) },
         });
+        props.deckWasSelected(createDeck.deck)
       }}
     >
       {(createDeck, { data }) => (

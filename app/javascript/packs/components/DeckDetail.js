@@ -65,8 +65,8 @@ class DeckDetail extends React.Component {
                       </tr>
                     )
                   })}
-                  <tr>
-                    <td className="input-group">
+                  <tr row>
+                    <td className="input-group col-3">
                       <input
                         type="text"
                         className="form-control"
@@ -78,7 +78,7 @@ class DeckDetail extends React.Component {
                         <span className="input-group-text">x</span>
                       </div>
                     </td>
-                    <td colSpan="2">
+                    <td colSpan="2" className="col-6">
                       <Query query={AutocompleteCardQuery} variables={{query: this.state.cardQuery}}>
                         {({ loading, error, data }) => {
                           if (error) {
@@ -100,7 +100,7 @@ class DeckDetail extends React.Component {
                         }}
                       </Query>
                     </td>
-                    <td colSpan="2">
+                    <td colSpan="2" className="col-3">
                       <Mutation
                         mutation={AddCardMutation}
                         update={(cache, { data }) => {

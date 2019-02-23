@@ -1,3 +1,9 @@
+PATH
+  remote: ../graphql-pro
+  specs:
+    graphql-pro (1.9.12)
+      graphql (>= 1.7.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -228,6 +234,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   graphiql-rails
   graphql (~> 1.9.0)
+  graphql-pro!
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.11)
