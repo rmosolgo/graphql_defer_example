@@ -20,13 +20,17 @@ class DeckDetail extends React.Component {
     }
     return (
       <Query query={GetDeckDetailQuery} variables={{deckId: this.props.deckId}}>
-        {({ loading, error, data }) => {
+        {({ loading, error, data, loadingState}) => {
           if (loading) {
             return <p>Loading ... </p>
           } else if (error) {
+            console.error(error)
             return <p>Error: {String(error)}</p>
           } else {
             const deck = data.deck
+            if (!deck) {
+              return <p>No deck</p>
+            }
             return (
               <div>
                 <h1>{deck.name}</h1>
@@ -35,14 +39,14 @@ class DeckDetail extends React.Component {
                   </thead>
                   <tbody>
                   {deck.slots.map((slot) => {
-                    const totalPrice = (Math.round(slot.card.price * slot.quantity * 100) / 100).toFixed(2)
+                    const totalPrice = slot.card ? (Math.round(slot.card.price * slot.quantity * 100) / 100).toFixed(2) : "..."
                     return (
-                      <tr key={slot.id}>
-                        <td>{slot.quantity}x</td>
-                        <td>{slot.card.name}</td>
-                        <td>{slot.card.type}</td>
-                        <td>${totalPrice}</td>
-                        <td>
+                      <tr key={slot.id} className="row">
+                        <td className="col-1">{slot.quantity}x</td>
+                        <td className="col-5">{slot.card && slot.card.name}</td>
+                        <td className="col-4">{slot.card && slot.card.type}</td>
+                        <td className="col-1">${totalPrice}</td>
+                        <td className="col-1">
                           <Mutation
                             mutation={RemoveCardMutation}
                             update={(cache, { data }) => {
@@ -55,7 +59,7 @@ class DeckDetail extends React.Component {
                           >
                             {(removeCard, { data }) => {
                               return (
-                                <button className="btn btn-outline-danger btn-sm" onClick={(e) => removeCard({variables: { deckId: deck.id, cardId: slot.card.id }})}>
+                                <button className="btn btn-outline-danger btn-sm" onClick={(e) => removeCard({variables: { deckId: deck.id, cardId: slot.card && slot.card.id }})}>
                                   𝘅
                                 </button>
                               )
@@ -65,8 +69,8 @@ class DeckDetail extends React.Component {
                       </tr>
                     )
                   })}
-                  <tr row>
-                    <td className="input-group col-3">
+                  <tr className="row">
+                    <td className="col-1">
                       <input
                         type="text"
                         className="form-control"
@@ -74,16 +78,14 @@ class DeckDetail extends React.Component {
                         value={this.state.selectedQuantity}
                         onChange={(e) => this.setState({ selectedQuantity: Number(e.target.value) })}
                       />
-                      <div className="input-group-append">
-                        <span className="input-group-text">x</span>
-                      </div>
                     </td>
-                    <td colSpan="2" className="col-6">
+                    <td colSpan="2" className="col-9">
                       <Query query={AutocompleteCardQuery} variables={{query: this.state.cardQuery}}>
                         {({ loading, error, data }) => {
                           if (error) {
                             return <p>Error: {String(error)}</p>
                           } else {
+                            const options = (loading || (!data.searchCards)) ? [] : data.searchCards.map((card) => ({id: card.id, name: card.name}))
                             return <AsyncTypeahead
                               labelKey="name"
                               minLength={3}
@@ -92,7 +94,7 @@ class DeckDetail extends React.Component {
                               multiple={false}
                               onChange={(items) => { this.setState({selectedCard: items[0]}) }}
                               onSearch={(q) => { this.setState({cardQuery: q}) }}
-                              options={loading ? [] : data.searchCards.map((card) => ({id: card.id, name: card.name}))}
+                              options={options}
                               placeholder="Find a card..."
                               ref={(typeahead) => this.typeahead = typeahead}
                             />
@@ -100,7 +102,7 @@ class DeckDetail extends React.Component {
                         }}
                       </Query>
                     </td>
-                    <td colSpan="2" className="col-3">
+                    <td colSpan="2" className="col-2">
                       <Mutation
                         mutation={AddCardMutation}
                         update={(cache, { data }) => {
@@ -122,7 +124,6 @@ class DeckDetail extends React.Component {
                                 quantity: this.state.selectedQuantity,
                                 deckId: deck.id
                               }
-                              console.log(variables)
                               addCard({variables: variables})
                             }}
                           >

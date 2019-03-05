@@ -1,0 +1,3 @@
+[submodule "app/javascript/apollo-client"]
+	path = app/javascript/apollo-client
+	url = git@github.com:rmosolgo/apollo-client.git

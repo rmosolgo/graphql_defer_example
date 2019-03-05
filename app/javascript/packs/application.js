@@ -24,5 +24,4 @@ const client = new ApolloClient({
   },
 });
 
-
 render(<App client={client}/>, document.getElementById("app-root"));

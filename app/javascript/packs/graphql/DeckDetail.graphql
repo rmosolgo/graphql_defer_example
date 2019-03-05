@@ -4,7 +4,7 @@ fragment DeckDetail on Deck {
   slots {
     id
     quantity
-    card {
+    card @defer {
       id
       name
       type
