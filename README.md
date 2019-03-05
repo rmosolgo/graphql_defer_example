@@ -16,7 +16,7 @@ The app is a deck builder for Magic the Gathering:
 - Clone the repo
 - `bundle install`
 - `bundle exec db:create db:migrate`
-- Install & compile the local `apollo-client` fork:
+- Install & compile the local `apollo-client` fork (https://github.com/rmosolgo/apollo-client/):
   - `cd app/javascript/apollo-client`
   - `npm install`
 - `yarn install`
