@@ -5,7 +5,10 @@ ruby '2.5.1'
 
 gem "graphql", "~>1.9.0"
 gem 'bootstrap', '~> 4.3.1'
-gem "graphql-pro", path: "~/code/graphql-pro"
+
+source "https://gems.graphql.pro" do
+  gem "graphql-pro"
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
